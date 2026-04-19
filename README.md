@@ -20,13 +20,13 @@
 1. Clonează repo-ul:
 
    ```bash
-   git clone [https://github.com/vlad/CryptoSandbox.git](https://github.com/vlad/CryptoSandbox.git)
+   git clone https://github.com/JohnnyThunderX/CryptoSandboxRO.git
    ```
 
 2. Accesează directorul proiectului:
 
    ```bash
-      cd CryptoSandbox
+      cd CryptoSandboxRO
    ```
 
 3. Rulează aplicația
