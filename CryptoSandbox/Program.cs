@@ -1,0 +1,117 @@
+﻿using System.Text;
+using CryptoSandbox.Courses;
+using CryptoSandbox.Engine;
+using Spectre.Console;
+using static CryptoSandbox.Courses.Utils;
+
+namespace CryptoSandbox
+{
+    internal class Program
+    {
+        static void Titles()
+        {
+            var figlet = new FigletText("CryptoSandbox")
+            {
+                Color = Color.GreenYellow,
+                Justification = Justify.Left,
+            };
+            var rule = new Rule()
+            {
+                Title = "Meniu de selecție demonstrații",
+                Style = Style.Parse("#00ff22"),
+                Justification = Justify.Left,
+            };
+            AnsiConsole.Write(figlet);
+            AnsiConsole.Write(rule);
+        }
+
+        static void Main(string[] args)
+        {
+            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
+            bool exit = false;
+            try
+            {
+                while (!exit)
+                {
+                    AnsiConsole.Clear();
+                    Titles();
+                    var demo = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                            .Title("[yellow bold]Alege un demo dintre cele de mai jos:[/]")
+                            .PageSize(4)
+                            .HighlightStyle(Color.Magenta)
+                            .MoreChoicesText(
+                                "[grey](Folosește tastele-săgeți pentru a naviga în meniu)[/]"
+                            )
+                            .AddChoices(
+                                "Factorizarea numerelor prime",
+                                "Criptarea mesajelor",
+                                "PQC Demo",
+                                "Închide aplicația"
+                            )
+                            .AddCancelResult("none")
+                    );
+                    switch (demo)
+                    {
+                        case "Factorizarea numerelor prime":
+                            Primes.Run();
+                            break;
+                        case "Criptarea mesajelor":
+                            CryptoPlayground.Run();
+                            break;
+                        case "PQC Demo":
+                            PQC.Run();
+                            break;
+                        case "Închide aplicația":
+                            exit = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var choice = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[red bold]HOPA! Se pare că aplicația nu a funcționat corect:[/]")
+                        .PageSize(3)
+                        .HighlightStyle(Color.Red)
+                        .MoreChoicesText(
+                            "[grey](Folosește tastele-săgeți pentru a naviga în meniu)[/]"
+                        )
+                        .AddChoices("Afișează mesajul de eroare", "Închide aplicația")
+                        .AddCancelResult("none")
+                );
+                switch (choice)
+                {
+                    case "Afișează mesajul de eroare":
+                        AnsiConsole.WriteException(ex);
+                        Pause();
+                        break;
+                    case "Închide aplicația":
+                        exit = true;
+                        break;
+                    default:
+                        exit = true;
+                        break;
+                }
+                AnsiConsole.WriteException(ex);
+            }
+            finally
+            {
+                AnsiConsole
+                    .Status()
+                    .Spinner(Spinner.Known.BluePulse)
+                    .Start(
+                        "[blue bold]Se închide...[/]",
+                        ctx =>
+                        {
+                            Thread.Sleep(1000);
+                        }
+                    );
+            }
+        }
+    }
+}
