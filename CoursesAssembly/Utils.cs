@@ -28,32 +28,6 @@ namespace CryptoSandbox.Courses
                 };
                 Process.Start(powershell);
             }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                // for MacOS
-                var process = Process.Start(
-                    new ProcessStartInfo("pbcopy")
-                    {
-                        RedirectStandardInput = true,
-                        UseShellExecute = false,
-                    }
-                );
-                process.StandardInput.Write(text);
-                process.StandardInput.Close();
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                // for Linux try xclip (needs to be installed)
-                var process = Process.Start(
-                    new ProcessStartInfo("xclip", "-selection clipboard")
-                    {
-                        RedirectStandardInput = true,
-                        UseShellExecute = false,
-                    }
-                );
-                process.StandardInput.Write(text);
-                process.StandardInput.Close();
-            }
         }
     }
 }
