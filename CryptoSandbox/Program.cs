@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.InteropServices;
+using System.Text;
 using CryptoSandbox.Courses;
 using CryptoSandbox.Engine;
 using Spectre.Console;
@@ -22,6 +23,10 @@ namespace CryptoSandbox
                 Justification = Justify.Left,
             };
             AnsiConsole.Write(figlet);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                AnsiConsole.MarkupLine(
+                    "[grey]Pentru utilizatorii WINDOWS: pentru o experiență optimă, alege din setări „Windows Terminal” ca terminal implicit.[/]"
+                );
             AnsiConsole.Write(rule);
         }
 

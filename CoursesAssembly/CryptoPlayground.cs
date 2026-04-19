@@ -90,7 +90,7 @@ namespace CryptoSandbox.Courses
                     + "\n\t[magenta]2)[/] Cheia nu este cea corectă"
             );
             AnsiConsole.MarkupLine(
-                "> [cyan bold]SFAT[/]: Insrează cheia și modifică [magenta]o singură[/] [red bold]LITERĂ[/] pentru a evita erorile de format al cheii."
+                "> [cyan bold]SFAT[/]: Inserează cheia și modifică [magenta]o singură[/] [red bold]LITERĂ[/] pentru a evita erorile de format al cheii."
             );
             Pause();
 
@@ -269,10 +269,12 @@ namespace CryptoSandbox.Courses
             var valid = VerifySignature(msg, sig, input);
             if (!valid)
                 AnsiConsole.MarkupLine(
-                    "[green bold]✓ Semnătura a fost depistată cu succes ca fiind modificată![/]"
+                    "[green bold]✓ Semnătura a fost depistată cu succes ca fiind [yellow]modificată[/]![/]"
                 );
             else
                 AnsiConsole.MarkupLine("[red bold]Ups! Se pare că a intervenit o eroare![/]");
+
+            Pause();
             AnsiConsole.MarkupLine(
                 "\n> [yellow]În cele din urmă, pentru a putea falsifica un mesaj vei avea nevoie de cheia privată:[/]"
             );

@@ -18,7 +18,7 @@ namespace CryptoSandbox.Courses
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                // Pe Windows folosim PowerShell pentru că 'clip.exe' are probleme cu textul foarte lung
+                // for Windows
                 var powershell = new ProcessStartInfo
                 {
                     FileName = "powershell",
@@ -30,7 +30,7 @@ namespace CryptoSandbox.Courses
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                // Pe Mac folosim pbcopy
+                // for MacOS
                 var process = Process.Start(
                     new ProcessStartInfo("pbcopy")
                     {
@@ -43,7 +43,7 @@ namespace CryptoSandbox.Courses
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                // Pe Linux încercăm xclip (trebuie să fie instalat pe sistem)
+                // for Linux try xclip (needs to be installed)
                 var process = Process.Start(
                     new ProcessStartInfo("xclip", "-selection clipboard")
                     {
