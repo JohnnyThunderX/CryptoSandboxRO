@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using System.Runtime.CompilerServices;
+using Spectre.Console;
 using static CryptoSandbox.Courses.Utils;
 
 namespace CryptoSandbox.Courses
@@ -106,30 +107,36 @@ namespace CryptoSandbox.Courses
                     );
                     int gX = int.Parse(parts[0]);
                     int gY = int.Parse(parts[1]);
-
-                    bool isCorrect = (gX == secretX && gY == secretY);
-
-                    // add the attempt in the history
-                    attempts.Add((gX, gY, isCorrect));
-
-                    if (isCorrect)
+                    if (gX < 0 || gX > width || gY < 0 || gY > height)
                     {
-                        found = true;
-                        AnsiConsole.Clear();
-                        AnsiConsole.Write(
-                            new Panel(GenerateCanvas(attempts))
-                                .Header("DECRIPTAT")
-                                .BorderColor(Color.Green)
-                        );
-                        AnsiConsole.MarkupLine(
-                            "[green bold]✓ EXCELENT! Ai eliminat eroarea și ai găsit punctul secret![/]"
-                        );
+                        AnsiConsole.MarkupLine("[red]Punctul nu se află în rețea![/]");
+                        Thread.Sleep(2000); // let the user see the error message
+                    }
+                    else
+                    {
+                        bool isCorrect = (gX == secretX && gY == secretY);
+
+                        // add the attempt in the history
+                        attempts.Add((gX, gY, isCorrect));
+                        if (isCorrect)
+                        {
+                            found = true;
+                            AnsiConsole.Clear();
+                            AnsiConsole.Write(
+                                new Panel(GenerateCanvas(attempts))
+                                    .Header("DECRIPTAT")
+                                    .BorderColor(Color.Green)
+                            );
+                            AnsiConsole.MarkupLine(
+                                "[green bold]✓ EXCELENT! Ai eliminat eroarea și ai găsit punctul secret![/]"
+                            );
+                        }
                     }
                 }
                 catch
                 {
                     AnsiConsole.MarkupLine("[red]Format invalid![/]");
-                    Thread.Sleep(1000); // let the user see the error message
+                    Thread.Sleep(2000); // let the user see the error message
                 }
             }
         }
