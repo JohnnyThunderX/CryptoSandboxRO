@@ -152,7 +152,7 @@ namespace CryptoSandbox.Courses
                 "1) Acum vei [magenta]observa[/] cum un calculator va face exact ceea ce ai experimentat și la [blue]TESTUL 1[/]."
                     + $"\n2) PC-ul va primi o rețea de {bfWidth}×{bfHeight} căsuțe, în care va căuta [magenta]una câte una[/] până va ajunge la cea corectă."
                     + "\n3) Spre deosebire de tine, [magenta]calculatorul nu va ști marja de eroare[/], exact ca într-o situație reală."
-                    + "\n4) Tcomai ed aceea, [magenta]brute-force[/] rămâne singura soluție."
+                    + "\n4) Tocmai de aceea, [magenta]brute-force[/] rămâne singura soluție."
                     + "\n[cyan bold]Privește cu atenție procesul vizual![/]"
             );
             var panel = new Panel(contents)
