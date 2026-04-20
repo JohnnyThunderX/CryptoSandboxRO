@@ -26,7 +26,7 @@
 2. Accesează directorul proiectului:
 
    ```bash
-      cd CryptoSandboxRO
+   cd CryptoSandboxRO
    ```
 
 3. Rulează aplicația
