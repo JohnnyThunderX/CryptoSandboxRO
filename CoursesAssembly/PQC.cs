@@ -34,6 +34,8 @@ namespace CryptoSandbox.Courses
                 "1) Acum vei avea ocazia să experimentezi [magenta]criptografia PQC[/] în cadrul unui experiment [magenta]Lattice-based[/]."
                     + $"\n2) Vei primi un [magenta]tabel de {width}×{height} căsuțe[/], colorate în diverse nuanțe."
                     + "\n3) Vei primi un punct ce are [red]coordonatele greșite[/] și va trebui să găsești [green]punctul original[/], prin încercări."
+                    + $"\n4) Coorodonatele pot avea valorile 0-{width - 1} în lungime și 0-{height - 1} în lățime."
+                    + "\n5) Codul de culori utilizat este:\n   [blue]Date publice[/]\n   [red]Încercare eșuată[/]\n   [green]Cheia originală[/]"
                     + "\n[cyan bold]SUCCES![/]"
             );
             var panel = new Panel(contents)
@@ -107,10 +109,10 @@ namespace CryptoSandbox.Courses
                     );
                     int gX = int.Parse(parts[0]);
                     int gY = int.Parse(parts[1]);
-                    if (gX < 0 || gX > width || gY < 0 || gY > height)
+                    if (gX < 0 || gX >= width || gY < 0 || gY >= height)
                     {
                         AnsiConsole.MarkupLine("[red]Punctul nu se află în rețea![/]");
-                        Thread.Sleep(2000); // let the user see the error message
+                        Pause();
                     }
                     else
                     {
@@ -150,6 +152,7 @@ namespace CryptoSandbox.Courses
                 "1) Acum vei [magenta]observa[/] cum un calculator va face exact ceea ce ai experimentat și la [blue]TESTUL 1[/]."
                     + $"\n2) PC-ul va primi o rețea de {bfWidth}×{bfHeight} căsuțe, în care va căuta [magenta]una câte una[/] până va ajunge la cea corectă."
                     + "\n3) Spre deosebire de tine, [magenta]calculatorul nu va ști marja de eroare[/], exact ca într-o situație reală."
+                    + "\n4) Tcomai ed aceea, [magenta]brute-force[/] rămâne singura soluție."
                     + "\n[cyan bold]Privește cu atenție procesul vizual![/]"
             );
             var panel = new Panel(contents)

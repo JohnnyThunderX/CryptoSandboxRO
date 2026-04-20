@@ -102,9 +102,9 @@ namespace CryptoSandbox.Courses
             AnsiConsole.Clear();
             Markup contents = new Markup(
                 $"0) Dacă la primul test ai văzut cât de dificil poate fi pentru un om să rezolve factorizarea numerelor prime,\n   acum [magenta]vei asista[/] PC-ul tău la rezolvarea a {samples} de astfel de probleme."
-                    + $"\n1) Calculatorul generează {samples} numere [italic magenta]N = p × q[/] din ce în ce mai mari."
+                    + $"\n1) Calculatorul generează [red bold]{samples} de numere[/] [italic magenta]N = p × q[/] din ce în ce mai mari."
                     + "\n2) [bold yellow]Brute-force automat:[/] Procesorul caută divizorii până la [magenta]√N[/]."
-                    + "\n3) Urmărește coloana de [cyan]Timp[/] pentru a vedea creșterea dificultății."
+                    + "\n3) Urmărește coloanele de [cyan]timp[/] pentru a vedea cum crește dificultatea odată cu nr. cifrelor."
             );
 
             var panel = new Panel(contents)
@@ -123,6 +123,7 @@ namespace CryptoSandbox.Courses
                 .Expand()
                 .AddColumn("[yellow]Nr.[/]")
                 .AddColumn("[magenta]N (Produs)[/]")
+                .AddColumn("[green]Cifre[/]")
                 .AddColumn("[white]Factorul[/] [green italic bold]p[/]")
                 .AddColumn("[white]Factorul[/] [green italic bold]q[/]")
                 .AddColumn("[cyan]Milisecunde[/]")
@@ -150,6 +151,7 @@ namespace CryptoSandbox.Courses
                             q = long.MaxValue / p;
                         }
                         long n = p * q;
+                        double digits = Math.Floor(Math.Log10(n) + 1);
 
                         // --- MEASUREMENT START ---
                         Stopwatch sw = Stopwatch.StartNew();
@@ -175,6 +177,7 @@ namespace CryptoSandbox.Courses
                         table.AddRow(
                             "[yellow]" + (c + 1).ToString() + "[/]",
                             n.ToString("N0"),
+                            $"[green]{digits}[/]",
                             foundP.ToString("N0"),
                             (n / foundP).ToString("N0"),
                             $"[cyan bold]{ms:F4} ms[/]",
@@ -186,6 +189,7 @@ namespace CryptoSandbox.Courses
                 });
             AnsiConsole.WriteLine();
             Pause();
+            // solve-time evolution
             var chart = new BarChart()
                 .Width(60)
                 .Label("[green bold]Evoluția Timpului de Calcul (ms)[/]")
@@ -204,12 +208,41 @@ namespace CryptoSandbox.Courses
 
             AnsiConsole.Write(chart);
             Pause();
+
+            // brute force vs gnfs comparison
             Console.WriteLine();
             AnsiConsole.Write(
-                new Rule("[yellow]Proiecție Teoretică (Brute-Force)[/]").RuleStyle("grey")
+                new Rule("[yellow]Proiecție Teoretică (Brute-Force vs GNFS)[/]").RuleStyle("grey")
             );
+            AnsiConsole.MarkupLine(
+                "[blue bold]•[/] [magenta]GNFS[/] (General Number Field Sieve) este una dintre cele mai eficiente metode de a rezolva astfel de numere (>10^100, adică [magenta italic]googol[/])"
+                    + "\n[blue bold]•[/] [magenta]De ce nu se folosesc numere sub 100 de cifre?[/] Pentru că, după cum ai observat, singurele probleme care împiedică spargerea lor sunt [magenta]puterea de calcul[/] și [magenta]metoda aleasă[/], [red]limitele tehnologiei[/]."
+                    + "\n[blue bold]•[/] [magenta]Server [red]VS[/] PC[/]: Recordurile pentru spargerea numerelor RSA sunt adesea rezultatul a sute de procesoare puternice care lucrează simultan."
+                    + "\n[blue bold]•[/] Măsurătorile de mai jos urmăresc formatul [magenta]ani/procesor modern individual[/] și se bazează pe o variantă simplificată a formulei complexității GNFS."
+            );
+            Pause();
             Console.WriteLine();
-            void PrintProjection(int digits)
+
+            string FormatTime(double years)
+            {
+                if (years > 1e12)
+                    return "Trilioane de ani";
+                if (years > 1e9)
+                    return $"{years / 1e9:F1} Mld. de ani";
+                if (years > 1e6)
+                    return $"{years / 1e6:F1} Mil. de ani";
+                if (years >= 1)
+                    return $"{years:N0} ani";
+
+                double days = years * 365.25;
+                if (days >= 1)
+                    return $"{days:N0} zile";
+
+                double hours = days * 24;
+                return $"{hours:F1} ore";
+            }
+
+            string BruteForceEstimation(int digits)
             {
                 // compute the number of digits for last tested N
                 double currentDigits = Math.Floor(Math.Log10(lastP * lastQ) + 1);
@@ -225,31 +258,52 @@ namespace CryptoSandbox.Courses
                     * Math.Pow(Math.Sqrt(10), extraDigits)
                     / (3600 * 24 * 365.25);
 
-                // text formatting
-                string timeStr;
-                if (years > 1e12)
-                    timeStr = "Trilioane de ani (Peste vârsta Universului)";
-                else if (years > 1e9)
-                    timeStr = $"{years / 1e9:F1} Miliarde de ani";
-                else if (years > 1e6)
-                    timeStr = $"{years / 1e6:F1} Milioane de ani";
-                else if (years >= 1)
-                    timeStr = $"{years:N0} ani";
-                else
-                    timeStr = "Sub un an (necesită numere mai mari pentru siguranță)";
-
-                AnsiConsole.MarkupLine(
-                    $"[blue]•[/] Pentru [magenta bold]{digits} cifre[/]: [red]{timeStr}[/]"
-                );
+                return FormatTime(years);
             }
 
-            PrintProjection(10);
-            PrintProjection(30);
-            PrintProjection(50);
-            PrintProjection(55);
-            PrintProjection(100);
-            PrintProjection(512);
-            PrintProjection(1024);
+            double CalculateGNFSEffort(int digits)
+            {
+                // n is the number's max value
+                double lnN = digits * Math.Log(10);
+                double lnLnN = Math.Log(lnN);
+                // c is approx. 1.923 for GNFS
+                double c = 1.923;
+                // compute the exponent: c * (ln n)^(1/3) * (ln ln n)^(2/3)
+                double exponent = c * Math.Pow(lnN, 1.0 / 3.0) * Math.Pow(lnLnN, 2.0 / 3.0);
+
+                return Math.Exp(exponent);
+            }
+
+            string GNFSEstimation(int digits)
+            {
+                // compute estimated effort for current number
+                double currentEffort = CalculateGNFSEffort(digits);
+                // reference point: RSA-155 (155 digits)
+                double referenceYears = 100;
+                // the effort for 155 digits is ~100 years for a single modern CPU
+                double referenceEffort = CalculateGNFSEffort(155);
+                // finish estimated time based on the effort scale (using rule of three)
+                double estimatedYears = (currentEffort / referenceEffort) * referenceYears;
+                return FormatTime(estimatedYears);
+            }
+            int[] digitDifficulties = { 10, 30, 50, 100, 200, 500, 1000 };
+            table = new Table()
+                .Border(TableBorder.Rounded)
+                .Expand()
+                .Caption(
+                    "[blue dim]Aceste valori reprezintă estimări și nu reflectă cu precizie realitatea.[/]"
+                )
+                .ShowRowSeparators()
+                .AddColumn("[yellow bold]Nr. cifre[/]")
+                .AddColumn("[red bold]Brute-Force[/]")
+                .AddColumn("[green bold]GNFS[/]");
+            foreach (int diff in digitDifficulties)
+                table.AddRow(
+                    diff.ToString(),
+                    $"[red]{BruteForceEstimation(diff)}[/]",
+                    $"[green]{GNFSEstimation(diff)}[/]"
+                );
+            AnsiConsole.Write(table);
         }
 
         private static void ThirdTest()
@@ -316,6 +370,7 @@ namespace CryptoSandbox.Courses
                 "[blue bold]•[/] [white bold]Cum funcționează factorizarea numerelor prime[/]."
                     + "\n[blue bold]•[/] [white bold]Cât de mult durează să „spargi” un astfel de număr față de cât durează să îl generezi[/]."
                     + "\n[blue bold]•[/] [white bold]De ce contează numărul de cifre în criptografie[/]"
+                    + "\n[blue bold]•[/] [white bold]Criptografia este de fapt o cursă a înarmării cu cele mai eficiente și sigure metode de protejare a datelor.[/]"
             );
         }
 

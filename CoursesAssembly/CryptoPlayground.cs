@@ -154,11 +154,14 @@ namespace CryptoSandbox.Courses
                     );
                     ctx.Refresh();
                 });
-            AnsiConsole.MarkupLine(
-                "[magenta underline]Mesajul decriptat:[/]" + $"\n\t[blue]{decrypted.msg}[/]"
+            AnsiConsole.Write(
+                new Panel($"[blue]{decrypted.msg}[/]")
+                    .Header("[magenta]Mesajul decriptat[/]")
+                    .Expand()
             );
-            AnsiConsole.MarkupLine(
-                "[magenta underline]Mesajul inițial:[/]" + $"\n\t[white]{initialmsg}[/]"
+
+            AnsiConsole.Write(
+                new Panel($"[white]{initialmsg}[/]").Header("[magenta]Mesajul inițial[/]").Expand()
             );
             Pause();
         }
@@ -406,8 +409,6 @@ namespace CryptoSandbox.Courses
 
         public static void Run()
         {
-            introduction();
-            keypoints();
             introduction();
             keypoints();
             bool back = false;

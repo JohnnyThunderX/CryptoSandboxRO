@@ -23,6 +23,10 @@ namespace CryptoSandbox
                 Justification = Justify.Left,
             };
             AnsiConsole.Write(figlet);
+
+            string githubLink = "https://github.com/JohnnyThunderX";
+            AnsiConsole.MarkupLine($"Creat de: [link={githubLink}]@JohnnyThunderX[/]");
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 AnsiConsole.MarkupLine(
                     "[grey]Pentru utilizatorii WINDOWS: pentru o experiență optimă, alege din setări „Windows Terminal” ca terminal implicit.[/]"
@@ -43,7 +47,7 @@ namespace CryptoSandbox
                     Titles();
                     var demo = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
-                            .Title("[yellow bold]Alege un demo dintre cele de mai jos:[/]")
+                            .Title("[yellow bold]Selectează un scenariu demo:[/]")
                             .PageSize(4)
                             .HighlightStyle(Color.Magenta)
                             .MoreChoicesText(
