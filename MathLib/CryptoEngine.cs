@@ -201,5 +201,27 @@ namespace CryptoSandbox.Engine
             RandomNumberGenerator.Fill(fakeBytes);
             return Convert.ToBase64String(fakeBytes);
         }
+
+        public static long ShuffleDigits(long number)
+        {
+            // convert the number to an array of characters
+            char[] digits = number.ToString().ToCharArray();
+            Random rng = new Random();
+
+            // Fisher-Yates algorithm
+            int n = digits.Length;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                var value = digits[k];
+                digits[k] = digits[n];
+                digits[n] = value;
+            }
+
+            // convert back to long
+            string shuffledString = new string(digits);
+            return long.Parse(shuffledString);
+        }
     }
 }

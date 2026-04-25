@@ -11,7 +11,7 @@ namespace CryptoSandbox.Courses
             AnsiConsole.Markup("[bold green]APASĂ ORICE PENTRU A CONTINUA[/]");
             Console.ReadKey();
             AnsiConsole.Cursor.MoveUp(1);
-            AnsiConsole.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
+            AnsiConsole.Write("\r" + new string(' ', Console.WindowWidth) + "\r\n");
         }
 
         public static void CopyToClipboard(string text)

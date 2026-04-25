@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Spectre.Console;
+﻿using Spectre.Console;
 using static CryptoSandbox.Courses.Utils;
 
 namespace CryptoSandbox.Courses
@@ -221,7 +220,7 @@ namespace CryptoSandbox.Courses
                 "> [white bold]Dacă singura soluție eficientă în cazul în care nu se cunoaște procesul de atribuire a zgomotului (cum a fost atribuită eroare la coordonate)\natunci imagineazăți același proces dar în peste 100 de dimensiuni. Greu de crezut că un calculatorul ar putea găsi punctul corect încercând zeci de milioane de puncte, nu crezi? Tocmai de aceea LWE este un standard bun în PQC.[/]"
             );
             AnsiConsole.MarkupLine(
-                "\n[green underline]AICI SE ÎNCHEIE CEL DE AL TREILEA ȘI ULTIM SET DE DEMONSTRAȚII[/]"
+                "\n[green underline]AICI SE ÎNCHEIE CEL DE-AL PATRULEA ȘI ULTIM SET DE DEMONSTRAȚII[/]"
             );
             AnsiConsole.MarkupLine("[blue underline]Ce ai experimentat:[/]");
             AnsiConsole.MarkupLine(

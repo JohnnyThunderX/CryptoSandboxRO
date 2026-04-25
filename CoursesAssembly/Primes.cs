@@ -360,7 +360,7 @@ namespace CryptoSandbox.Courses
                 Pause();
             }
             AnsiConsole.MarkupLine(
-                "[white bold]Ai observat că generarea unor numere atât de mari este aproape instantanee?\n\tȘi totuși este imposibilă rezolvarea acestor chei în prezent...[/]"
+                "[white bold]> Ai observat că generarea unor numere atât de mari este aproape instantanee?\n\tȘi totuși este imposibilă rezolvarea acestor chei în prezent...[/]"
             );
             AnsiConsole.MarkupLine(
                 "\n[green underline]AICI SE ÎNCHEIE PRIMUL SET DE DEMONSTRAȚII[/]"

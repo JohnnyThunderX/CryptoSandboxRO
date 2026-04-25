@@ -48,7 +48,7 @@ namespace CryptoSandbox
                     var demo = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                             .Title("[yellow bold]Selectează un scenariu demo:[/]")
-                            .PageSize(4)
+                            .PageSize(6)
                             .HighlightStyle(Color.Magenta)
                             .MoreChoicesText(
                                 "[grey](Folosește tastele-săgeți pentru a naviga în meniu)[/]"
@@ -56,7 +56,9 @@ namespace CryptoSandbox
                             .AddChoices(
                                 "Factorizarea numerelor prime",
                                 "Criptarea mesajelor",
+                                "Handshake Securizat (Simulare Plată NFC)",
                                 "PQC Demo",
+                                "Structura testelor",
                                 "Închide aplicația"
                             )
                             .AddCancelResult("none")
@@ -69,8 +71,14 @@ namespace CryptoSandbox
                         case "Criptarea mesajelor":
                             CryptoPlayground.Run();
                             break;
+                        case "Handshake Securizat (Simulare Plată NFC)":
+                            NfcSim.Run();
+                            break;
                         case "PQC Demo":
                             PQC.Run();
+                            break;
+                        case "Structura testelor":
+                            Structure.Run();
                             break;
                         case "Închide aplicația":
                             exit = true;
@@ -106,7 +114,6 @@ namespace CryptoSandbox
                         exit = true;
                         break;
                 }
-                AnsiConsole.WriteException(ex);
             }
             finally
             {

@@ -397,7 +397,7 @@ namespace CryptoSandbox.Courses
             }
 
             AnsiConsole.MarkupLine(
-                "\n[green underline]AICI SE ÎNCHEIE CEL DE AL DOILEA SET DE DEMONSTRAȚII[/]"
+                "\n[green underline]AICI SE ÎNCHEIE CEL DE-AL DOILEA SET DE DEMONSTRAȚII[/]"
             );
             AnsiConsole.MarkupLine("[blue underline]Ce ai experimentat:[/]");
             AnsiConsole.MarkupLine(

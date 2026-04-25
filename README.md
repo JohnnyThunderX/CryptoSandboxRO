@@ -5,7 +5,8 @@
 ## Funcționalități Principale
 
 - **Modul Hashing:** Testează algoritmi precum MD5, SHA-256 și SHA-512. Observă "Efectul de Avalanșă" și verifică integritatea fișierelor locale (până la 100MB).
-- **Criptografie Asimetrică (RSA):** Generare de perechi de chei (până la 4096 biți), semnare digitală și verificare.
+- **Criptografie simetrică și asimetrică:** Generare de perechi de chei, semnare digitală și verificare, prin algoritmi ca **AES** și **RSA**.
+- **Simulare plată NFC:** Simularea simplificată a unei tranzacții prin NFC între un telefon și un POS.
 - **LWE (Learning With Errors):** Experimentează cu baze de criptografie post-cuantică. Încearcă să găsești "secretul" într-o matrice plină de zgomot matematic.
 - **Brute-Force Simulator:** Vizualizare grafică a modului în care un atacator încearcă să spargă o cheie și de ce complexitatea spațiului de căutare face acest lucru imposibil în criptografia modernă.
 
