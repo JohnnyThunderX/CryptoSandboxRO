@@ -132,8 +132,8 @@ namespace CryptoSandbox.Courses
 
                     // --- STEP 5 ---
                     UpdateUI(
-                        $"Efectuez [cyan]{powerBase}^{phonePrivKey}%{prime}[/]",
-                        $"Efectuez [cyan]{powerBase}^{posPrivKey}%{prime}[/]"
+                        $"Efectuez [cyan]{powerBase}^{phonePrivKey} mod {prime}[/]",
+                        $"Efectuez [cyan]{powerBase}^{posPrivKey} mod {prime}[/]"
                     );
                     Thread.Sleep(1000);
 
@@ -159,8 +159,8 @@ namespace CryptoSandbox.Courses
                     // --- STEP 7b ---
                     ;
                     UpdateUI(
-                        $"Calculez cheia de criptare: [cyan]{posPublicKey}^{phonePrivKey}%{prime}[/]",
-                        $"Calculez cheia de criptare: [cyan]{phonePublicKey}^{posPrivKey}%{prime}[/]"
+                        $"Calculez cheia de criptare: [cyan]{posPublicKey}^{phonePrivKey} mod {prime}[/]",
+                        $"Calculez cheia de criptare: [cyan]{phonePublicKey}^{posPrivKey} mod {prime}[/]"
                     );
                     Thread.Sleep(1000);
 
