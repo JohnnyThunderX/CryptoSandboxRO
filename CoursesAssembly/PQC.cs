@@ -217,7 +217,7 @@ namespace CryptoSandbox.Courses
                 $"[green bold]✓ Calculatorul a găsit cheia după {tries} încercări![/]"
             );
             AnsiConsole.MarkupLine(
-                "> [white bold]Dacă singura soluție eficientă în cazul în care nu se cunoaște procesul de atribuire a zgomotului (cum a fost atribuită eroare la coordonate)\natunci imagineazăți același proces dar în peste 100 de dimensiuni. Greu de crezut că un calculatorul ar putea găsi punctul corect încercând zeci de milioane de puncte, nu crezi? Tocmai de aceea LWE este un standard bun în PQC.[/]"
+                "> [white bold]Dacă singura soluție eficientă în cazul în care nu se cunoaște procesul de atribuire a zgomotului (cum a fost atribuită eroare la coordonate) atunci imaginează-ți același proces dar în peste 100 de dimensiuni.\n> Greu de crezut că un calculatorul ar putea găsi punctul corect încercând zeci de milioane de puncte, nu-i așa?\n> Tocmai de aceea LWE este un standard bun în PQC.[/]"
             );
             AnsiConsole.MarkupLine(
                 "\n[green underline]AICI SE ÎNCHEIE CEL DE-AL PATRULEA ȘI ULTIM SET DE DEMONSTRAȚII[/]"

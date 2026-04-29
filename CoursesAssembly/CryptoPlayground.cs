@@ -404,7 +404,7 @@ namespace CryptoSandbox.Courses
             AnsiConsole.MarkupLine(
                 "[blue bold]•[/] [white bold]Cum funcționează criptarea simetrică[/]."
                     + "\n[blue bold]•[/] [white bold]De ce criptarea asimetrică este mai sigură[/]."
-                    + "\n[blue bold]•[/] [white bold]Principalele tipuri de algorimti HASH și cum funcționează în general[/]"
+                    + "\n[blue bold]•[/] [white bold]Principalele tipuri de algorimti HASH și cum funcționează aceștia[/]."
             );
         }
 
