@@ -359,9 +359,10 @@ namespace CryptoSandbox.Courses
             {
                 while (true)
                 {
-                    input = AnsiConsole.Ask<string>(
-                        $"> [bold white]Fișierul tău ({test + 1}/{maxTests}):[/]"
-                    );
+                    input = AnsiConsole
+                        .Ask<string>($"> [bold white]Fișierul tău ({test + 1}/{maxTests}):[/]")
+                        .Replace("\"", "")
+                        .TrimEnd();
                     if (string.IsNullOrEmpty(input))
                         AnsiConsole.MarkupLine("[red]Acest câmp nu poate fi gol.[/]");
                     else if (!File.Exists(input))
