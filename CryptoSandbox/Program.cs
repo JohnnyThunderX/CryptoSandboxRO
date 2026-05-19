@@ -1,7 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 using CryptoSandbox.Courses;
-using CryptoSandbox.Engine;
 using Spectre.Console;
 using static CryptoSandbox.Courses.Utils;
 
@@ -24,8 +23,8 @@ namespace CryptoSandbox
             };
             AnsiConsole.Write(figlet);
 
-            string githubLink = "https://github.com/JohnnyThunderX";
-            AnsiConsole.MarkupLine($"Creat de: [link={githubLink}]@JohnnyThunderX[/]");
+            string githubLink = "https://github.com/vlad-stefan-florea";
+            AnsiConsole.MarkupLine($"Creat de: [link={githubLink}]@vlad-stefan-florea[/]");
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 AnsiConsole.MarkupLine(
